@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Submit to Google Sheet</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                background: #f0f4f8;
+            }
+            input,
+            textarea,
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+            }
+            button {
+                background: teal;
+                color: white;
+                font-weight: bold;
+            }
+            #status {
+                margin-top: 10px;
+                color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Submit Your Details</h2>
+
+        <form
+            id="myForm"
+            method="POST"
+            action="https://script.google.com/macros/s/AKfycbzIDeQD6s-NqQAbrSuv8wqiptubobn_KKdfG8K8H53YKh7rRC-5vgBrRku19rox63Dh/exec"
+        >
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+            />
+            <textarea
+                name="comment"
+                placeholder="Your Comment"
+                required
+            ></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+        <p id="status"></p>
+
+        <script>
+            const form = document.getElementById('myForm');
+            form.addEventListener('submit', function (e) {
+                document.getElementById('status').innerText = 'Submitting...';
+            });
+        </script>
+    </body>
+</html>
