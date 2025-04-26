@@ -1,0 +1,15 @@
+{
+    "name": "Google Sheet Form",
+    "short_name": "SheetForm",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f0f4f8",
+    "theme_color": "teal",
+    "icons": [
+        {
+            "src": "icon-min.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ]
+}
