@@ -1,44 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Submit to Google Sheet</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="teal" />
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <h2>Submit Your Details</h2>
-    <form
-        id="myForm"
-        method="POST"
-        action="https://script.google.com/macros/s/AKfycbzIDeQD6s-NqQAbrSuv8wqiptubobn_KKdfG8K8H53YKh7rRC-5vgBrRku19rox63Dh/exec"
-    >
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="comment" placeholder="Your Comment" required></textarea>
-        <button type="submit">Submit</button>
-    </form>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Submit Query Details</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="teal" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h2>Submit Query Details</h2>
+        <form
+            id="myForm"
+            method="POST"
+            action="https://script.google.com/macros/s/AKfycbzIDeQD6s-NqQAbrSuv8wqiptubobn_KKdfG8K8H53YKh7rRC-5vgBrRku19rox63Dh/exec"
+        >
+            <input type="date" name="date" placeholder="Date" required />
 
-    <p id="status"></p>
+            <input type="text" name="meter" placeholder="Meter" required />
 
-    <script>
-        const form = document.getElementById('myForm');
-        form.addEventListener('submit', function (e) {
-            document.getElementById('status').innerText = 'Submitting...';
-        });
+            <select name="status" required>
+                <option value="">Select Status</option>
+                <option value="Left On Supply">Left On Supply</option>
+                <option value="Not">Not</option>
+            </select>
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }, function(err) {
-                    console.log('Service Worker registration failed:', err);
-                });
+            <select name="reason" required>
+                <option value="">Select Reason</option>
+                <option value="Burnt">Burnt</option>
+                <option value="Faulty">Faulty</option>
+                <option value="Tampered">Tampered</option>
+                <option value="Bypassed">Bypassed</option>
+            </select>
+
+            <input
+                type="text"
+                name="customer_name"
+                placeholder="Customer Name"
+                required
+            />
+
+            <input
+                type="text"
+                name="customer_contact"
+                placeholder="Customer Contact"
+                required
+            />
+
+            <input
+                type="text"
+                name="responsible_person"
+                placeholder="Responsible Person"
+                required
+            />
+
+            <input type="text" name="address" placeholder="Address" required />
+
+            <input
+                type="text"
+                name="feeder_name"
+                placeholder="Feeder Name"
+                required
+            />
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <script>
+            const form = document.getElementById('myForm');
+            form.addEventListener('submit', function (e) {
+                document.getElementById('status').innerText = 'Submitting...';
             });
-        }
-    </script>
-</body>
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('/service-worker.js').then(
+                        function (registration) {
+                            console.log(
+                                'Service Worker registered with scope:',
+                                registration.scope
+                            );
+                        },
+                        function (err) {
+                            console.log(
+                                'Service Worker registration failed:',
+                                err
+                            );
+                        }
+                    );
+                });
+            }
+        </script>
+    </body>
 </html>
