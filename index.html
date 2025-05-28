@@ -1,95 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Submit Query Details</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="manifest" href="manifest.json" />
-        <meta name="theme-color" content="teal" />
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-        <h2>Submit Query Details</h2>
-        <form
-            id="myForm"
-            method="POST"
-            action="https://script.google.com/macros/s/AKfycbwOLMJI1SbjYzAmHnbdvK4BWPUI0kUqxets2QayMbvBhkktEsCb1tEecMg30IjGyfYf/exec"
-        >
-            <input type="date" name="date" placeholder="Date" required />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Submit Query Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="teal" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+              <h4 class="mb-0">Submit Query Details</h4>
+            </div>
+            <div class="card-body">
+              <form
+                id="myForm"
+                method="POST"
+                action="https://script.google.com/macros/s/AKfycbz0Q1K6M4OgE8ZidZ15v9UHwbbsalgJ2SuxUC-AiAXqpgacZWLxBkPNc-vyTBkdD5bj6w/exec"
+              >
+                <div class="mb-3">
+                  <label class="form-label">Date</label>
+                  <input type="date" name="date" class="form-control" required />
+                </div>
 
-            <input type="text" name="meter" placeholder="Meter" required />
+                <div class="mb-3">
+                  <label class="form-label">Meter Number</label>
+                  <input type="text" name="meter" class="form-control" required />
+                </div>
+                 <div class="mb-3">
+                  <label class="form-label">Feeder Name</label>
+                  <input type="text" name="feeder_name" class="form-control" />
+                </div>
 
-            <select name="status" required>
-                <option value="">Select Status</option>
-                <option value="Left On Supply">Left On Supply</option>
-                <option value="Not">Not</option>
-            </select>
+                <div class="mb-3">
+                  <label class="form-label">Status</label>
+                  <select name="status" class="form-select" required>
+                    <option value="">Select Status</option>
+                    <option value="Left On Supply">Left On Supply</option>
+                    <option value="Left Off Supply">Left Off Supply</option>
+                  </select>
+                </div>
 
-            <select name="reason" required>
-                <option value="">Select Reason</option>
-                <option value="Burnt">Burnt</option>
-                <option value="Faulty">Faulty</option>
-                <option value="Tampered">Tampered</option>
-                <option value="Bypassed">Bypassed</option>
-            </select>
+                <div class="mb-3">
+                  <label class="form-label">Reason</label>
+                  <select name="reason" class="form-select" required>
+                    <option value="">Select Reason</option>
+                    <option value="Burnt">Burnt</option>
+                    <option value="Faulty">Faulty</option>
+                    <option value="Tampered">Tampered</option>
+                    <option value="Bypassed">Bypassed</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
 
-            <input
-                type="text"
-                name="customer_name"
-                placeholder="Customer Name"
-                required
-            />
+                <div class="mb-3">
+                  <label class="form-label">Customer Name</label>
+                  <input type="text" name="customer_name" class="form-control" required />
+                </div>
 
-            <input
-                type="text"
-                name="customer_contact"
-                placeholder="Customer Contact"
-                required
-            />
+                <div class="mb-3">
+                  <label class="form-label">Customer Contact</label>
+                  <input type="text" name="customer_contact" class="form-control" required />
+                </div>
 
-            <input
-                type="text"
-                name="responsible_person"
-                placeholder="Responsible Person"
-                required
-            />
+                <div class="mb-3">
+                  <label class="form-label">Responsible Person</label>
+                  <input type="text" name="responsible_person" class="form-control" required />
+                </div>
 
-            <input type="text" name="address" placeholder="Address" required />
+                <div class="mb-3">
+                  <label class="form-label">Check Number</label>
+                  <input type="text" name="check_number" class="form-control" required />
+                </div>
 
-            <input
-                type="text"
-                name="feeder_name"
-                placeholder="Feeder Name"
-                required
-            />
+                <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <input type="text" name="address" class="form-control" required />
+                </div>
 
-            <button type="submit">Submit</button>
-        </form>
+                <div class="mb-3">
+                  <label class="form-label">Upload File</label>
+                  <input type="file" id="file" class="form-control" required />
+                </div>
 
-        <script>
-            const form = document.getElementById('myForm');
-            form.addEventListener('submit', function (e) {
-                document.getElementById('status').innerText = 'Submitting...';
+                <!-- Hidden fields -->
+                <input type="hidden" name="fileData" id="fileData" />
+                <input type="hidden" name="filename" id="filename" />
+                <input type="hidden" name="mimeType" id="mimeType" />
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("myForm");
+      const fileInput = document.getElementById("file");
+
+      form.addEventListener("submit", function (e) {
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Please select a file.");
+          e.preventDefault();
+          return;
+        }
+
+        e.preventDefault(); // Pause to encode file
+
+        const reader = new FileReader();
+        reader.onload = function () {
+          const base64Data = reader.result.split(",")[1];
+          document.getElementById("fileData").value = base64Data;
+          document.getElementById("filename").value = file.name;
+          document.getElementById("mimeType").value = file.type;
+          form.submit(); // Resume submission
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log("Service Worker registered:", registration.scope);
+            })
+            .catch((err) => {
+              console.log("Service Worker registration failed:", err);
             });
-
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function () {
-                    navigator.serviceWorker.register('/service-worker.js').then(
-                        function (registration) {
-                            console.log(
-                                'Service Worker registered with scope:',
-                                registration.scope
-                            );
-                        },
-                        function (err) {
-                            console.log(
-                                'Service Worker registration failed:',
-                                err
-                            );
-                        }
-                    );
-                });
-            }
-        </script>
-    </body>
+        });
+      }
+    </script>
+  </body>
 </html>
