@@ -7,7 +7,6 @@ self.addEventListener('install', function(e) {
           'index.html',
           'manifest.json',
           'style.css', 
-          'script.js', 
           'icon-min.png'
         ]);
       })
